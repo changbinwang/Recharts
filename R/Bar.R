@@ -5,7 +5,7 @@
 #' @import htmlwidgets
 #'
 #' @export
-Recharts <- function(category,data,type,title,subtitle="",interval='auto', width = NULL, height = NULL) {
+Bar <- function(category,data,type="bar",title,subtitle="",interval='auto', width = NULL, height = NULL) {
   # forward options using x
   x = list(
     category = category,
@@ -18,7 +18,7 @@ Recharts <- function(category,data,type,title,subtitle="",interval='auto', width
 
   # create widget
   htmlwidgets::createWidget(
-    name = 'Recharts',
+    name = 'Bar',
     x,
     width = width,
     height = height,
@@ -29,14 +29,14 @@ Recharts <- function(category,data,type,title,subtitle="",interval='auto', width
 #' Widget output function for use in Shiny
 #'
 #' @export
-RechartsOutput <- function(outputId, width = '100%', height = '400px'){
-  shinyWidgetOutput(outputId, 'Recharts', width, height, package = 'Recharts')
+BarOutput <- function(outputId, width = '100%', height = '400px'){
+  shinyWidgetOutput(outputId, 'Bar', width, height, package = 'Recharts')
 }
 
 #' Widget render function for use in Shiny
 #'
 #' @export
-renderRecharts <- function(expr, env = parent.frame(), quoted = FALSE) {
+renderBar <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) } # force quoted
   shinyRenderWidget(expr, RechartsOutput, env, quoted = TRUE)
 }

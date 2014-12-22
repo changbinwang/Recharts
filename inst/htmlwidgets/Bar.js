@@ -1,6 +1,6 @@
 HTMLWidgets.widget({
 
-  name: 'Recharts',
+  name: 'Bar',
 
   type: 'output',
 
