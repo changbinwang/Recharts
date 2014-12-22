@@ -5,13 +5,15 @@
 #' @import htmlwidgets
 #'
 #' @export
-Recharts <- function(category,data,type,interval='auto', width = NULL, height = NULL) {
+Recharts <- function(category,data,type,title,subtitle="",interval='auto', width = NULL, height = NULL) {
   # forward options using x
   x = list(
     category = category,
     data = data,
     type = type,
-    interval = interval
+    interval = interval,
+    title = title,
+    subtitle = subtitle
   )
 
   # create widget

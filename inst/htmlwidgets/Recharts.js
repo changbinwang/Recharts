@@ -12,19 +12,40 @@ HTMLWidgets.widget({
 
   },
 
-  renderValue: function(el, x, instance) { 
+  renderValue: function(el, x, instance) {
+    var text = x.title;
+    var subtext = x.subtitle; 
     var type = x.type;
     var category = x.category;
     var data = x.data;
     var legend = Object.keys(data);
     var series = [];
     for (var i = legend.length - 1; i >= 0; i--) {
-    	var object = {"name":legend[i],"type":type,"data":data[legend[i]]};
+    	var object = {
+    		"name":legend[i],
+    		"type":type,
+    		"data":data[legend[i]],
+    		"markPoint" : {
+    			"data" : [
+                    {"type" : 'max', "name": '最大值'},
+                    {"type" : 'min', "name": '最小值'}
+                ]
+            },
+            "markLine" : {
+                "data" : [
+                    {"type" : 'average', "name": '平均值'}
+                ]
+            }};
     	series.push(object);
     };
     var interval = x.interval;
     
     var option = {
+        title:{
+          text:text,
+          subtext:subtext
+        },
+        
         toolbox: {
           show : true,
           feature : {
