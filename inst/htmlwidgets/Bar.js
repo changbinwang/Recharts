@@ -5,6 +5,8 @@ HTMLWidgets.widget({
   type: 'output',
 
   initialize: function(el, width, height) {
+    document.getElementById(el.id).width = width;
+    document.getElementById(el.id).height = height;
     var myChart = echarts.init(document.getElementById(el.id)); 
     return {
       chart: myChart
@@ -98,7 +100,9 @@ HTMLWidgets.widget({
 },
 
   resize: function(el, width, height, instance) {
-
+    document.getElementById(el.id).width = width;
+    document.getElementById(el.id).height = height;
+    instance.chart.resize();
   }
 
 });
