@@ -18,6 +18,8 @@ HTMLWidgets.widget({
     var text = x.title;
     var avg = x.avg;
     var extremum = x.extremum;
+    var hori = x.horizontal;
+    var smooth = x.smooth;
     var subtext = x.subtitle; 
     var type = x.type;
     var category = x.category;
@@ -28,7 +30,8 @@ HTMLWidgets.widget({
     	var object = {
     		"name":legend[i],
     		"type":type,
-    		"data":data[legend[i]]
+    		"data":data[legend[i]],
+        "smooth":smooth
       }
       
       if(extremum){
@@ -78,21 +81,39 @@ HTMLWidgets.widget({
         legend: {
             data:legend
         },
-        
-        xAxis : [
+        series : series
+    };
+
+    if(!hori){
+       option["xAxis"]=[
+            {
+                type : 'category',
+                data : category,
+                axisLabel : {interval:interval}
+
+            }
+        ];
+        option["yAxis"] = [
+            {
+                type : 'value'
+            }
+        ];
+    }else{
+      option["xAxis"] = [
+            {
+                type : 'value'
+            }
+        ];
+      option["yAxis"] = [
             {
                 type : 'category',
                 data : category,
                 axisLabel : {interval:interval}
             }
-        ],
-        yAxis : [
-            {
-                type : 'value'
-            }
-        ],
-        series : series
-    };
+        ];
+        
+
+    }
 
     // 为echarts对象加载数据 
     instance.chart.setOption(option); 
