@@ -5,7 +5,7 @@
 #' @import htmlwidgets
 #'
 #' @export
-Bar <- function(category,data,type="bar",title,subtitle="",interval='auto', width = NULL, height = NULL) {
+Bar <- function(category,data,type="bar",title,subtitle="",interval='auto', avg=T, extremum=T,width = NULL, height = NULL) {
   # forward options using x
   x = list(
     category = category,
@@ -13,7 +13,9 @@ Bar <- function(category,data,type="bar",title,subtitle="",interval='auto', widt
     type = type,
     interval = interval,
     title = title,
-    subtitle = subtitle
+    subtitle = subtitle,
+    avg = avg,
+    extremum = extremum
   )
 
   # create widget

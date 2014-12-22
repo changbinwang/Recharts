@@ -14,6 +14,8 @@ HTMLWidgets.widget({
 
   renderValue: function(el, x, instance) {
     var text = x.title;
+    var avg = x.avg;
+    var extremum = x.extremum;
     var subtext = x.subtitle; 
     var type = x.type;
     var category = x.category;
@@ -24,18 +26,26 @@ HTMLWidgets.widget({
     	var object = {
     		"name":legend[i],
     		"type":type,
-    		"data":data[legend[i]],
-    		"markPoint" : {
-    			"data" : [
+    		"data":data[legend[i]]
+      }
+      
+      if(extremum){
+        object["markPoint"]= {
+          "data" : [
                     {"type" : 'max', "name": '最大值'},
                     {"type" : 'min', "name": '最小值'}
                 ]
-            },
-            "markLine" : {
-                "data" : [
-                    {"type" : 'average', "name": '平均值'}
-                ]
-            }};
+            } 
+      }
+      
+      if(avg){
+        object["markLine"]= {
+            "data" : [
+                {"type" : 'average', "name": '平均值'}
+            ]
+        }
+      }
+      
     	series.push(object);
     };
     var interval = x.interval;
