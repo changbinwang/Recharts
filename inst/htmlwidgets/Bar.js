@@ -80,7 +80,7 @@ HTMLWidgets.widget({
         
         legend: {
             data:legend,
-            y: bottom
+            y: 'bottom'
         },
         series : series
     };
