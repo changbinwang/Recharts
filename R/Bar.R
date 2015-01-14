@@ -9,7 +9,7 @@ Bar <- function(category,data,type="bar",title,subtitle="",interval='auto', avg=
   # forward options using x
   x = list(
     category = category,
-    data = data,
+    data = as.data.frame(data),
     type = type,
     interval = interval,
     title = title,

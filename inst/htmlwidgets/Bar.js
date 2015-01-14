@@ -79,7 +79,8 @@ HTMLWidgets.widget({
         },
         
         legend: {
-            data:legend
+            data:legend,
+            y: bottom
         },
         series : series
     };
