@@ -5,11 +5,13 @@
 #' @import htmlwidgets
 #'
 #' @export
-Bar <- function(category,data,type="bar",title,subtitle="",interval='auto', avg=T, extremum=T,horizontal=F,smooth=F,width = NULL, height = NULL) {
+Bar <- function(category,data,names,type="bar",title,subtitle="",interval='auto', avg=T, extremum=T,horizontal=F,smooth=F,width = NULL, height = NULL) {
   # forward options using x
+  data = as.data.frame(data)
+  names(data) <- names
   x = list(
     category = category,
-    data = as.data.frame(data),
+    data = data,
     type = type,
     interval = interval,
     title = title,
@@ -42,5 +44,5 @@ BarOutput <- function(outputId, width = '100%', height = '400px'){
 #' @export
 renderBar <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) } # force quoted
-  shinyRenderWidget(expr, RechartsOutput, env, quoted = TRUE)
+  shinyRenderWidget(expr, BarOutput, env, quoted = TRUE)
 }

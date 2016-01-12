@@ -1,13 +1,13 @@
 HTMLWidgets.widget({
 
-  name: 'Bar',
+  name: 'BarMulti',
 
   type: 'output',
 
   initialize: function(el, width, height) {
     document.getElementById(el.id).width = width;
     document.getElementById(el.id).height = height;
-    var myChart = echarts.init(document.getElementById(el.id)); 
+    var myChart = echarts.init(document.getElementById(el.id));
     return {
       chart: myChart
     }
@@ -20,29 +20,32 @@ HTMLWidgets.widget({
     var extremum = x.extremum;
     var hori = x.horizontal;
     var smooth = x.smooth;
-    var subtext = x.subtitle; 
+    var subtext = x.subtitle;
     var type = x.type;
     var category = x.category;
-    var data = x.data;
-    var legend = Object.keys(data);
+    var data1 = x.data1;
+    var data2 = x.data2;
+    var legend1 = Object.keys(data1);
+    var legend2 = Object.keys(data2);
+    var yaxis = x.yaxis
     var series = [];
-    for (var i = legend.length - 1; i >= 0; i--) {
+    for (var i = legend1.length - 1; i >= 0; i--) {
     	var object = {
-    		"name":legend[i],
+    		"name":legend1[i],
     		"type":type,
-    		"data":data[legend[i]],
+    		"data":data1[legend1[i]],
         "smooth":smooth
       }
-      
+
       if(extremum){
         object["markPoint"]= {
           "data" : [
                     {"type" : 'max', "name": 'MAX'},
                     {"type" : 'min', "name": 'MIN'}
                 ]
-            } 
+            }
       }
-      
+
       if(avg){
         object["markLine"]= {
             "data" : [
@@ -50,21 +53,50 @@ HTMLWidgets.widget({
             ]
         }
       }
-      
+
     	series.push(object);
     };
+
+    for (var i = legend2.length - 1; i >= 0; i--) {
+      var object = {
+        "name":legend2[i],
+        "type":type,
+        "yAxisIndex": 1,
+        "data":data2[legend2[i]],
+        "smooth":smooth
+      }
+
+      if(extremum){
+        object["markPoint"]= {
+          "data" : [
+                    {"type" : 'max', "name": 'MAX'},
+                    {"type" : 'min', "name": 'MIN'}
+                ]
+            }
+      }
+
+      if(avg){
+        object["markLine"]= {
+            "data" : [
+                {"type" : 'average', "name": 'MEAN'}
+            ]
+        }
+      }
+
+      series.push(object);
+    };
     var interval = x.interval;
-    
+
     var option = {
         title:{
           text:text,
           subtext:subtext
         },
-        
+
         toolbox: {
           show : true,
-          x:'right',
-          y:'bottom',
+          //x:'right',
+          //y:'bottom',
           feature : {
               mark : {show: true},
               dataView : {show: false},
@@ -105,7 +137,7 @@ HTMLWidgets.widget({
           realtime : true,
           //orient: 'vertical',   // 'horizontal'
           //x: 0,
-          y: 36,
+          //y: 36,
           //width: 400,
           height: 20,
           //backgroundColor: 'rgba(221,160,221,0.5)',
@@ -117,16 +149,16 @@ HTMLWidgets.widget({
           start : 0,
           end : 100
         },
-        
+
         calculable : true,
-        
+
         tooltip: {
 
             show: true
         },
-        
+
         legend: {
-            data:legend,
+            data:legend1.concat(legend2),
             orient: 'vertical',
             x: 'right', // 'center' | 'left' | {number},
         	  y: 'center', // 'center' | 'bottom' | {number}
@@ -144,15 +176,29 @@ HTMLWidgets.widget({
             }
         ];
         option["yAxis"] = [
-            {
-                type : 'value'
-            }
+          {
+            type : 'value',
+            name : yaxis[0],
+
+          },
+          {
+            type : 'value',
+            name : yaxis[1],
+
+          }
         ];
     }else{
       option["xAxis"] = [
-            {
-                type : 'value'
-            }
+        {
+          type : 'value',
+          name : yaxis[0],
+
+        },
+        {
+          type : 'value',
+          name : yaxis[1],
+
+        }
         ];
       option["yAxis"] = [
             {
@@ -161,12 +207,12 @@ HTMLWidgets.widget({
                 axisLabel : {interval:interval}
             }
         ];
-        
+
 
     }
 
-    // 为echarts对象加载数据 
-    instance.chart.setOption(option); 
+    // 为echarts对象加载数据
+    instance.chart.setOption(option);
 
 },
 
