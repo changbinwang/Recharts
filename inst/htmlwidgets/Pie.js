@@ -27,7 +27,7 @@ HTMLWidgets.widget({
     		"value":value[i]
       }
       data_pie.push(object);
-    };
+    }
     var option = {
         title:{
           text:text,
@@ -85,7 +85,14 @@ HTMLWidgets.widget({
             type:'pie',
             radius : '55%',
             center: ['50%', '60%'],
-            data:data_pie
+            data:data_pie,
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
         }
     ]
     };

@@ -37,8 +37,8 @@ HTMLWidgets.widget({
       if(extremum){
         object["markPoint"]= {
           "data" : [
-                    {"type" : 'max', "name": 'MAX'},
-                    {"type" : 'min', "name": 'MIN'}
+                    {"type" : 'max', "name": '最大'},
+                    {"type" : 'min', "name": '最小'}
                 ]
             } 
       }
@@ -46,7 +46,7 @@ HTMLWidgets.widget({
       if(avg){
         object["markLine"]= {
             "data" : [
-                {"type" : 'average', "name": 'MEAN'}
+                {"type" : 'average', "name": '均值'}
             ]
         }
       }
@@ -127,9 +127,9 @@ HTMLWidgets.widget({
         
         legend: {
             data:legend,
-            orient: 'vertical',
-            x: 'right', // 'center' | 'left' | {number},
-        	  y: 'center', // 'center' | 'bottom' | {number}
+            //orient: 'vertical',
+            //x: 'right', // 'center' | 'left' | {number},
+        	  //y: 'center', // 'center' | 'bottom' | {number}
         },
         series : series
     };

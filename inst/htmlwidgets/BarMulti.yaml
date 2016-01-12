@@ -1,7 +1,7 @@
 # (uncomment to add a dependency)
 dependencies:
   - name: echarts
-    version: 2.1.10
+    version: 2.2.7
     src: htmlwidgets/lib/echarts/build/dist
     script:
       - echarts-all.js

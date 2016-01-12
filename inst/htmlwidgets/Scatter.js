@@ -113,13 +113,13 @@ HTMLWidgets.widget({
                     data: data,
                     markPoint: {
                         data: [
-                            {type: 'max', name: '最大值'},
-                            {type: 'min', name: '最小值'}
+                            {type: 'max', name: '最大'},
+                            {type: 'min', name: '最小'}
                         ]
                     },
                     markLine: {
                         data: [
-                            {type: 'average', name: '平均值'}
+                            {type: 'average', name: '均值'}
                         ]
                     }
 
