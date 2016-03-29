@@ -7,7 +7,7 @@ HTMLWidgets.widget({
   initialize: function(el, width, height) {
     document.getElementById(el.id).width = width;
     document.getElementById(el.id).height = height;
-    var myChart = echarts.init(document.getElementById(el.id)); 
+    var myChart = echarts.init(document.getElementById(el.id));
     return {
       chart: myChart
     }
@@ -20,12 +20,13 @@ HTMLWidgets.widget({
     var extremum = x.extremum;
     var hori = x.horizontal;
     var smooth = x.smooth;
-    var subtext = x.subtitle; 
+    var subtext = x.subtitle;
     var type = x.type;
     var category = x.category;
     var data = x.data;
     var legend = Object.keys(data);
     var series = [];
+    var formatterString = x.formatterString;
     for (var i = legend.length - 1; i >= 0; i--) {
     	var object = {
     		"name":legend[i],
@@ -33,34 +34,34 @@ HTMLWidgets.widget({
     		"data":data[legend[i]],
         "smooth":smooth
       }
-      
+
       if(extremum){
         object["markPoint"]= {
           "data" : [
                     {"type" : 'max', "name": '最大'},
                     {"type" : 'min', "name": '最小'}
                 ]
-            } 
+            }
       }
-      
+
       if(avg){
         object["markLine"]= {
             "data" : [
-                {"type" : 'average', "name": '均值'}
+                {type : 'average', name: '平均值'}
             ]
         }
       }
-      
+
     	series.push(object);
     };
     var interval = x.interval;
-    
+
     var option = {
         title:{
           text:text,
           subtext:subtext
         },
-        
+
         toolbox: {
           show : true,
           x:'right',
@@ -117,14 +118,14 @@ HTMLWidgets.widget({
           start : 0,
           end : 100
         },
-        
-        calculable : true,
-        
-        tooltip: {
 
+        calculable : true,
+
+        tooltip: {
+            trigger:'axis',
             show: true
         },
-        
+
         legend: {
             data:legend,
             //orient: 'vertical',
@@ -145,13 +146,19 @@ HTMLWidgets.widget({
         ];
         option["yAxis"] = [
             {
-                type : 'value'
+                type : 'value',
+                axisLabel:{
+                  formatter:'{value}'+formatterString
+                }
             }
         ];
     }else{
       option["xAxis"] = [
             {
-                type : 'value'
+                type : 'value',
+                axisLabel:{
+                  formatter:'{value}'+formatterString
+                }
             }
         ];
       option["yAxis"] = [
@@ -161,12 +168,12 @@ HTMLWidgets.widget({
                 axisLabel : {interval:interval}
             }
         ];
-        
+
 
     }
 
-    // 为echarts对象加载数据 
-    instance.chart.setOption(option); 
+    // 为echarts对象加载数据
+    instance.chart.setOption(option);
 
 },
 

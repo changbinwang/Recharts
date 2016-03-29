@@ -153,7 +153,7 @@ HTMLWidgets.widget({
         calculable : true,
 
         tooltip: {
-
+            trigger:'axis',
             show: true
         },
 

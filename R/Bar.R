@@ -5,7 +5,7 @@
 #' @import htmlwidgets
 #'
 #' @export
-Bar <- function(category,data,names,type="bar",title,subtitle="",interval='auto', avg=T, extremum=T,horizontal=F,smooth=F,width = NULL, height = NULL) {
+Bar <- function(category,data,names,type="bar",title,subtitle="",interval='auto', formatterString='',avg=T, extremum=T,horizontal=F,smooth=F,width = NULL, height = NULL) {
   # forward options using x
   data = as.data.frame(data)
   names(data) <- names
@@ -19,7 +19,8 @@ Bar <- function(category,data,names,type="bar",title,subtitle="",interval='auto'
     avg = avg,
     extremum = extremum,
     horizontal=horizontal,
-    smooth = smooth
+    smooth = smooth,
+    formatterString=formatterString
   )
 
   # create widget
