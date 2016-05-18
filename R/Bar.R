@@ -26,10 +26,11 @@ Bar <- function(category,data,names,type="bar",title,subtitle="",interval='auto'
   # create widget
   htmlwidgets::createWidget(
     name = 'Bar',
-    x,
+    x=x,
     width = width,
     height = height,
-    package = 'Recharts'
+    package = 'Recharts',
+    htmlwidgets::sizingPolicy(viewer.padding = 10, browser.fill = TRUE)
   )
 }
 
@@ -37,7 +38,7 @@ Bar <- function(category,data,names,type="bar",title,subtitle="",interval='auto'
 #'
 #' @export
 BarOutput <- function(outputId, width = '100%', height = '400px'){
-  shinyWidgetOutput(outputId, 'Bar', width, height, package = 'Recharts')
+  htmlwidgets::shinyWidgetOutput(outputId, 'Bar', width, height, package = 'Recharts')
 }
 
 #' Widget render function for use in Shiny
@@ -45,5 +46,5 @@ BarOutput <- function(outputId, width = '100%', height = '400px'){
 #' @export
 renderBar <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) } # force quoted
-  shinyRenderWidget(expr, BarOutput, env, quoted = TRUE)
+  htmlwidgets::shinyRenderWidget(expr, BarOutput, env, quoted = TRUE)
 }

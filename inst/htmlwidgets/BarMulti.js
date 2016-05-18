@@ -122,17 +122,10 @@ HTMLWidgets.widget({
               },
               restore : {show: true},
               saveAsImage : {show: true},
-              dataZoom : {
-                show : true,
-                title : {
-                  dataZoom : '区域缩放',
-                  dataZoomReset : '区域缩放后退'
-                }
-              },
             }
         },
 
-        dataZoom : {
+        dataZoom : [{
           show : true,
           realtime : true,
           //orient: 'vertical',   // 'horizontal'
@@ -149,6 +142,13 @@ HTMLWidgets.widget({
           start : 0,
           end : 100
         },
+        {
+            type: 'inside',
+            realtime: true,
+            start: 0,
+            end: 100
+        }
+        ],
 
         calculable : true,
 
@@ -212,6 +212,7 @@ HTMLWidgets.widget({
     }
 
     // 为echarts对象加载数据
+    instance.chart.clear();
     instance.chart.setOption(option);
 
 },
